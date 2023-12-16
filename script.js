@@ -1,4 +1,17 @@
 (function() {
+    (function() {
+        const fields = document.querySelectorAll(".field");
+        return (
+            fields.forEach(field => {
+                field.addEventListener("click", function() {
+                    let dataIndex = parseInt(this.getAttribute("data-index"));
+                    gameLogic.setField(dataIndex);
+                    console.log(dataIndex);
+                });
+            })
+        )
+    })();
+
     player = {
         player_x: "x",
         player_o: "o",
@@ -62,15 +75,3 @@
         },
     };
 })();
-
-/* GET FIELDS ON CLICK
-const fields = document.querySelectorAll(".field");
-fields.forEach(field => {
-    field.addEventListener("click", function() {
-        let dataIndex = parseInt(this.getAttribute("data-index"));
-        console.log(dataIndex);
-        player = "X"
-        setField(dataIndex, player)
-    })
-})
-*/
