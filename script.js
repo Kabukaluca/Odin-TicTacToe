@@ -6,7 +6,6 @@
                 field.addEventListener("click", function() {
                     let dataIndex = parseInt(this.getAttribute("data-index"));
                     gameLogic.setField(dataIndex);
-                    console.log(dataIndex);
                 });
             })
         )
@@ -31,14 +30,27 @@
 
     gameLogic = {
         setField(field) {
+            if(gameboard.gameboard[field] !== "") {
+                return(console.log(`This field (${field + 1}) has alread been set`))
+            } else {
+                gameboard.gameboard[field] = player.currPlayer;
+                return (
+                    console.log(`Current Player: ${player.currPlayer}`),
+                    gameboard.gameboard[field] = player.currPlayer,
+                    console.log(gameboard),
+                    gameLogic.checkWin(),
+                    console.log("checking for win")
+                )
+            }
+        },
+           /*
             return (
-                console.log(player.currPlayer),
+                console.log(`player.currPlayer`),
                 gameboard.gameboard[field] = player.currPlayer,
                 console.log(gameboard),
                 gameLogic.checkWin(),
                 console.log("checking for Win")
-            );
-        },
+            ); */
 
         restart() {
             return (
