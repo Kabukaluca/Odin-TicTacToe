@@ -1,4 +1,5 @@
 (function() {
+    // EVENT-LISTENER
     (function() {
         const fields = document.querySelectorAll(".field");
         return (
@@ -11,6 +12,7 @@
         )
     })();
 
+    // PLAYER
     player = {
         player_x: "x",
         player_o: "o",
@@ -24,10 +26,12 @@
         },
     };
 
+    // GAMEBOARD 
     gameboard = {
         gameboard: ["", "", "", "", "", "", "", "", ""]
     };
 
+    // GAME-LOGIC
     gameLogic = {
         setField(field) {
             if(gameboard.gameboard[field] !== "") {
@@ -37,25 +41,15 @@
                 return (
                     console.log(`Current Player: ${player.currPlayer}`),
                     gameboard.gameboard[field] = player.currPlayer,
-                    console.log(gameboard),
-                    gameLogic.checkWin(),
-                    console.log("checking for win")
+                    gameLogic.render(field),
+                    gameLogic.checkWin()
                 )
             }
         },
-           /*
-            return (
-                console.log(`player.currPlayer`),
-                gameboard.gameboard[field] = player.currPlayer,
-                console.log(gameboard),
-                gameLogic.checkWin(),
-                console.log("checking for Win")
-            ); */
 
-        restart() {
-            return (
-                gameboard.gameboard = ["", "", "", "", "", "", "", "", ""]
-            )
+        render(field) {
+            field = document.querySelector(`[data-index="${field}"]`);
+            field.id = player.currPlayer;
         },
 
         checkWin() {
@@ -84,6 +78,17 @@
                     player.switchPlayer()
                 );
             };
+        },
+
+        restart() {
+            fields = document.querySelectorAll("#o, #x");
+            return (
+                gameboard.gameboard = ["", "", "", "", "", "", "", "", ""],
+                // FIX THIS !!
+                fields.forEach(field => {
+                    field.id = "";
+                })
+            )
         },
     };
 })();
