@@ -1,3 +1,8 @@
+:root {
+    --field-size: 7.5rem;
+    --mark-size: calc(var(--field-size) * 0.9);
+}
+
 body {
     height: 100vh;
     width: 100vw;
@@ -12,6 +17,67 @@ body {
 
 .gameboard {
     display: grid;
-    grid-template-columns: repeat(3, 5rem);
-    grid-template-rows: repeat(3, 5rem);
+    grid-template-columns: repeat(3, 7.5rem);
+    grid-template-rows: repeat(3, 7.5rem);
+}
+
+.gameboard > .field {
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.gameboard > .field:nth-child(2),
+.gameboard > .field:nth-child(5),
+.gameboard > .field:nth-child(8) {
+    border-left: 3px solid black;
+    border-right: 3px solid black;
+}
+
+.gameboard > .field:nth-child(4),
+.gameboard > .field:nth-child(5),
+.gameboard > .field:nth-child(6) {
+    border-top: 3px solid black;
+    border-bottom: 3px solid black;
+}
+
+.gameboard > #x::before,
+.gameboard > #x::after {
+    content: "";
+    width: calc(var(--field-size) * 0.1);
+    height: var(--mark-size);
+    background-color: black;
+    border-radius: 1rem;
+    position: absolute;
+}
+
+.gameboard > #x::before {
+    transform: rotate(45deg);
+}
+
+.gameboard > #x::after {
+    transform: rotate(-45deg);
+}
+
+.gameboard > #o::before {
+    content: "";
+    width: calc(var(--mark-size) * 0.85);
+    height: calc(var(--mark-size) * 0.85);
+    background-color: black;
+    border-radius: 10rem;
+    position: absolute;
+}
+
+.gameboard > #o::after {
+    content: "";
+    width: calc(var(--mark-size) * 0.65);
+    height: calc(var(--mark-size) * 0.65);
+    background-color: white;
+    border-radius: 10rem;
+    position: absolute;
 }
