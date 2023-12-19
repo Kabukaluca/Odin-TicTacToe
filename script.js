@@ -53,6 +53,7 @@
         },
 
         checkWin() {
+            dialog = document.querySelector(`.outcome-overlay`);
             winningCombinations = [
                 [0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], 
                 [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]
@@ -66,11 +67,15 @@
             if (win) {
                 return(
                     console.log(`${player.currPlayer} Won the Game!`),
+                    dialog.showModal(),
+                    dialog.classList.add("active"),
                     gameLogic.restart()
                 );
             } else if (draw) {
                 return (
                     console.log("It's a draw!"),
+                    dialog.showModal(),
+                    dialog.classList.add("active"),
                     gameLogic.restart()
                 );
             } else {
@@ -82,13 +87,19 @@
 
         restart() {
             fields = document.querySelectorAll("#o, #x");
-            return (
-                gameboard.gameboard = ["", "", "", "", "", "", "", "", ""],
-                // FIX THIS !!
-                fields.forEach(field => {
-                    field.id = "";
-                })
-            )
+            restartBtn = document.querySelector(".restart-btn");
+            restartBtn.addEventListener("click", () => {
+                return (
+                    gameboard.gameboard = ["", "", "", "", "", "", "", "", ""],
+    
+                    fields.forEach(field => {
+                        field.id = "";
+                    
+                    dialog.classList.remove("active");  
+                    dialog.close();
+                    })
+                );
+            });
         },
     };
 })();
