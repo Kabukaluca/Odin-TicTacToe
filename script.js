@@ -20,8 +20,7 @@
 
         switchPlayer: function() {
             return (
-                this.currPlayer = (this.currPlayer === this.player_x) ? this.player_o : this.player_x,
-                console.log(`Player has been changed to ${this.currPlayer}`)
+                this.currPlayer = (this.currPlayer === this.player_x) ? this.player_o : this.player_x
             );
         },
     };
@@ -39,7 +38,6 @@
             } else {
                 gameboard.gameboard[field] = player.currPlayer;
                 return (
-                    console.log(`Current Player: ${player.currPlayer}`),
                     gameboard.gameboard[field] = player.currPlayer,
                     gameLogic.render(field),
                     gameLogic.checkWin()
@@ -68,7 +66,6 @@
 
             if (win) {
                 return(
-                    console.log(`${player.currPlayer} Won the Game!`),
                     dialog.showModal(),
                     dialog.classList.add("active"),
 
@@ -77,7 +74,6 @@
                 );
             } else if (draw) {
                 return (
-                    console.log("It's a draw!"),
                     dialog.showModal(),
                     dialog.classList.add("active"),
                 
@@ -98,12 +94,12 @@
 
             restartBtn.addEventListener("click", () => {
                 return (
-                    console.log("clicked"),
                     gameboard.gameboard = ["", "", "", "", "", "", "", "", ""],
     
                     fields.forEach(field => {
                         field.id = "";
                     }),
+
                     dialog.classList.remove("active"),
                     dialog.close()
                 );
