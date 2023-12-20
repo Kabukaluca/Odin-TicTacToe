@@ -1,5 +1,5 @@
 (function() {
-    // EVENT-LISTENER
+    // INIT
     (function() {
         const fields = document.querySelectorAll(".field");
         return (
@@ -14,9 +14,9 @@
 
     // PLAYER
     player = {
-        player_x: "x",
-        player_o: "o",
-        currPlayer: "x",
+        player_x: "X",
+        player_o: "O",
+        currPlayer: "X",
 
         switchPlayer: function() {
             return (
@@ -31,7 +31,7 @@
         gameboard: ["", "", "", "", "", "", "", "", ""]
     };
 
-    // GAME-LOGIC
+    // GAMELOGIC
     gameLogic = {
         setField(field) {
             if(gameboard.gameboard[field] !== "") {
@@ -54,6 +54,8 @@
 
         checkWin() {
             dialog = document.querySelector(`.outcome-overlay`);
+            outcomeMsg = document.querySelector(".outcome-msg");
+
             winningCombinations = [
                 [0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], 
                 [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]
@@ -69,6 +71,8 @@
                     console.log(`${player.currPlayer} Won the Game!`),
                     dialog.showModal(),
                     dialog.classList.add("active"),
+
+                    outcomeMsg.innerText =`${player.currPlayer} Wins The Game`,
                     gameLogic.restart()
                 );
             } else if (draw) {
@@ -76,6 +80,8 @@
                     console.log("It's a draw!"),
                     dialog.showModal(),
                     dialog.classList.add("active"),
+                
+                    outcomeMsg.innerText= "It's a Draw!",
                     gameLogic.restart()
                 );
             } else {
@@ -86,20 +92,22 @@
         },
 
         restart() {
-            fields = document.querySelectorAll("#o, #x");
+            fields = document.querySelectorAll("#O, #X");
             restartBtn = document.querySelector(".restart-btn");
+            dialog = document.querySelector(".outcome-overlay");
+
             restartBtn.addEventListener("click", () => {
                 return (
+                    console.log("clicked"),
                     gameboard.gameboard = ["", "", "", "", "", "", "", "", ""],
     
                     fields.forEach(field => {
                         field.id = "";
-                    
-                    dialog.classList.remove("active");  
-                    dialog.close();
-                    })
+                    }),
+                    dialog.classList.remove("active"),
+                    dialog.close()
                 );
-            });
-        },
+            });     
+        }
     };
 })();

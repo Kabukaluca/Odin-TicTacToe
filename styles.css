@@ -46,8 +46,8 @@ body {
     border-bottom: 3px solid black;
 }
 
-.gameboard > #x::before,
-.gameboard > #x::after {
+.gameboard > #X::before,
+.gameboard > #X::after {
     content: "";
     width: calc(var(--field-size) * 0.1);
     height: var(--mark-size);
@@ -56,15 +56,15 @@ body {
     position: absolute;
 }
 
-.gameboard > #x::before {
+.gameboard > #X::before {
     transform: rotate(45deg);
 }
 
-.gameboard > #x::after {
+.gameboard > #X::after {
     transform: rotate(-45deg);
 }
 
-.gameboard > #o::before {
+.gameboard > #O::before {
     content: "";
     width: calc(var(--mark-size) * 0.85);
     height: calc(var(--mark-size) * 0.85);
@@ -73,11 +73,62 @@ body {
     position: absolute;
 }
 
-.gameboard > #o::after {
+.gameboard > #O::after {
     content: "";
     width: calc(var(--mark-size) * 0.65);
     height: calc(var(--mark-size) * 0.65);
     background-color: white;
     border-radius: 10rem;
     position: absolute;
+}
+
+.outcome-overlay {
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: none;
+    background-color: rgb(255, 0, 0);
+
+    opacity: 0;
+    pointer-events: none;
+    position: fixed;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.outcome-overlay.active {
+    opacity: 0.5;
+    pointer-events: auto;
+    transition: opacity 0.2s ease-in-out;
+    animation: fadeIn 0.2s ease-in-out;
+}
+
+.outcome-overlay > .popup {
+    opacity: 1;
+    width: 75vw;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+}
+
+.outcome-overlay > .popup > .outcome-msg {
+    opacity: 1;
+    padding: 1rem;
+    color: white;
+    font-size: 5rem;
+    letter-spacing: 0.5rem;
+}
+
+.outcome-overlay > .popup > .restart-btn {
+    opacity: 1;
+    margin: 1rem;
+    width: 8rem;
+    height: 2.5rem;
+    cursor: pointer;
 }
