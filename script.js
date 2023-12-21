@@ -7,6 +7,7 @@
                 field.addEventListener("click", function() {
                     let dataIndex = parseInt(this.getAttribute("data-index"));
                     gameLogic.setField(dataIndex);
+
                 });
             })
         )
@@ -33,11 +34,18 @@
     // GAMELOGIC
     gameLogic = {
         setField(field) {
+            const errorMsg = document.querySelector(".error-msg");
+            const error = document.querySelector(".error");
+
             if(gameboard.gameboard[field] !== "") {
-                return(console.log(`This field (${field + 1}) has alread been set`))
+                return(
+                    errorMsg.innerText = (`This field >${field + 1}< has already ben selected by ${player.currPlayer}`),
+                    error.classList.add("active")
+                    )
             } else {
                 gameboard.gameboard[field] = player.currPlayer;
                 return (
+                    error.classList.remove("active"),
                     gameboard.gameboard[field] = player.currPlayer,
                     gameLogic.render(field),
                     gameLogic.checkWin()
