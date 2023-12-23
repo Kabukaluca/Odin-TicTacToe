@@ -28,7 +28,19 @@
 
     // GAMEBOARD 
     gameboard = {
-        gameboard: ["", "", "", "", "", "", "", "", ""]
+        gameboard: ["", "", "", "", "", "", "", "", ""],
+        blur() {
+            const gameContainer = document.querySelector(".game-container");
+            return (
+                gameContainer.classList.add("blur")
+            )
+        },
+        removeBlur() {
+            const gameContainer = document.querySelector(".game-container");
+            return (
+                gameContainer.classList.remove("blur")
+            )
+        }
     };
 
     // GAMELOGIC
@@ -39,13 +51,13 @@
 
             if(gameboard.gameboard[field] !== "") {
                 return(
-                    errorMsg.innerText = (`This field >${field + 1}< has already ben selected by ${player.currPlayer}`),
-                    error.classList.add("active")
+                    errorMsg.innerText = (`This field (${field + 1}) has already been selected by ${player.currPlayer}`),
+                    errorMsg.classList.add("active")
                     )
             } else {
                 gameboard.gameboard[field] = player.currPlayer;
                 return (
-                    error.classList.remove("active"),
+                    errorMsg.classList.remove("active"),
                     gameboard.gameboard[field] = player.currPlayer,
                     gameLogic.render(field),
                     gameLogic.checkWin()
@@ -76,6 +88,7 @@
                 return(
                     dialog.showModal(),
                     dialog.classList.add("active"),
+                    gameboard.blur(),
 
                     outcomeMsg.innerText =`${player.currPlayer} Wins The Game`,
                     gameLogic.restart()
@@ -84,6 +97,7 @@
                 return (
                     dialog.showModal(),
                     dialog.classList.add("active"),
+                    gameboard.blur(),
                 
                     outcomeMsg.innerText= "It's a Draw!",
                     gameLogic.restart()
@@ -109,6 +123,7 @@
                     }),
 
                     dialog.classList.remove("active"),
+                    gameboard.removeBlur(),
                     dialog.close()
                 );
             });     
