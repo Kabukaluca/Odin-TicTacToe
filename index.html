@@ -6,20 +6,36 @@
     <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
     <title>Tic Tac Toe</title>
+    <link rel="shortcut icon" type="icon" href="./tictactoe.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="gameboard">
-        <button class="field" data-index="0" type="button"></button>
-        <button class="field" data-index="1" type="button"></button>
-        <button class="field" data-index="2" type="button"></button>
+    <dialog class="outcome-overlay" data-modal>
+        <div class="popup">
+            <div class="outcome-msg"></div>
+            <button class="restart-btn" type="button">Restart</button>
+        </div>
+    </dialog>
 
-        <button class="field" data-index="3" type="button"></button>
-        <button class="field" data-index="4" type="button"></button>
-        <button class="field" data-index="5" type="button"></button>
-
-        <button class="field" data-index="6" type="button"></button>
-        <button class="field" data-index="7" type="button"></button>
-        <button class="field" data-index="8" type="button"></button>
+    <div class="game-container">
+        <div class="heading">Tic Tac Toe</div>
+        <div class="gameboard">
+            <button class="field" data-index="0" type="button"></button>
+            <button class="field" data-index="1" type="button"></button>
+            <button class="field" data-index="2" type="button"></button>
+            <button class="field" data-index="3" type="button"></button>
+            <button class="field" data-index="4" type="button"></button>
+            <button class="field" data-index="5" type="button"></button>
+            <button class="field" data-index="6" type="button"></button>
+            <button class="field" data-index="7" type="button"></button>
+            <button class="field" data-index="8" type="button"></button>
+        </div>
+        <div class="error">
+            <div class="error-msg">Test Message</div>
+        </div>
+        <div class="footer">Copyright © 2023 Kabukaluca</div>
     </div>
 </body>
 </html>

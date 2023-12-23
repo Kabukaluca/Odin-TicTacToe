@@ -9,16 +9,50 @@ body {
 
     margin: 0;
     padding: 0;
+    font-family: "Indie Flower", sans-serif;
+}
 
-    display: flex;
+.game-container {
+    height: 100vh;
+    width: 100vw;
+
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-areas: 
+    "heading"
+    "gameboard"
+    "error";
+    transition: opacity 0.5s ease-in-out;
+}
+
+.game-container.blur {
+    filter: blur(4px);
+    transition: opacity 0.5s ease-in-out;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.heading {
+    font-size: 5rem;
+
+    grid-area: "heading";
+    display: grid;
     justify-content: center;
     align-items: center;
 }
 
 .gameboard {
+    grid-area: "gameboard";
+    justify-self: center;
+    align-self: center;
+
     display: grid;
-    grid-template-columns: repeat(3, 7.5rem);
-    grid-template-rows: repeat(3, 7.5rem);
+    grid-template-columns: repeat(3, 8rem);
+    grid-template-rows: repeat(3, 8rem);
+
+    background-color: transparent;
+
+    transition: opacity 0.3s ease-in-out;
 }
 
 .gameboard > .field {
@@ -35,15 +69,15 @@ body {
 .gameboard > .field:nth-child(2),
 .gameboard > .field:nth-child(5),
 .gameboard > .field:nth-child(8) {
-    border-left: 3px solid black;
-    border-right: 3px solid black;
+    border-left: 4px solid black;
+    border-right: 4px solid black;
 }
 
 .gameboard > .field:nth-child(4),
 .gameboard > .field:nth-child(5),
 .gameboard > .field:nth-child(6) {
-    border-top: 3px solid black;
-    border-bottom: 3px solid black;
+    border-top: 4px solid black;
+    border-bottom: 4px solid black;
 }
 
 .gameboard > #X::before,
@@ -66,18 +100,9 @@ body {
 
 .gameboard > #O::before {
     content: "";
-    width: calc(var(--mark-size) * 0.85);
-    height: calc(var(--mark-size) * 0.85);
-    background-color: black;
-    border-radius: 10rem;
-    position: absolute;
-}
-
-.gameboard > #O::after {
-    content: "";
-    width: calc(var(--mark-size) * 0.65);
-    height: calc(var(--mark-size) * 0.65);
-    background-color: white;
+    width: calc(var(--mark-size) * 0.59);
+    height: calc(var(--mark-size) * 0.59);
+    border: calc(var(--mark-size) * 0.1) solid black;
     border-radius: 10rem;
     position: absolute;
 }
@@ -85,29 +110,28 @@ body {
 .outcome-overlay {
     width: 100vw;
     height: 100vh;
+    padding: 0;
 
     display: flex;
     justify-content: center;
     align-items: center;
 
     border: none;
-    background-color: rgb(255, 0, 0);
+    background-color: rgba(99, 99, 99, 0.5);
 
     opacity: 0;
     pointer-events: none;
-    position: fixed;
-    transition: opacity 0.2s ease-in-out;
+    transition: opacity 0.5s ease-in-out;
 }
 
 .outcome-overlay.active {
-    opacity: 0.5;
+    opacity: 1;
     pointer-events: auto;
-    transition: opacity 0.2s ease-in-out;
-    animation: fadeIn 0.2s ease-in-out;
+    transition: opacity 0.5s ease-in-out;
+    animation: fadeIn 0.5s ease-in-out;
 }
 
 .outcome-overlay > .popup {
-    opacity: 1;
     width: 75vw;
     height: 80vh;
     display: flex;
@@ -118,17 +142,63 @@ body {
 }
 
 .outcome-overlay > .popup > .outcome-msg {
-    opacity: 1;
     padding: 1rem;
     color: white;
     font-size: 5rem;
+    font-weight: bold;
     letter-spacing: 0.5rem;
 }
 
 .outcome-overlay > .popup > .restart-btn {
-    opacity: 1;
     margin: 1rem;
     width: 8rem;
     height: 2.5rem;
     cursor: pointer;
+
+    font-size: 1.15rem;
+    letter-spacing: .15rem;
+
+    border: 2px solid black;
+    border-radius: 8px;
+    color: black;
+    background-color: white;
+}
+
+.outcome-overlay > .popup > .restart-btn:hover {
+    background-color: rgb(212, 212, 212);
+}
+
+.error {
+    grid-area: error;
+    color: transparent;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.error-msg {
+    opacity: 0;
+    color: White;
+    background-color: rgba(255, 0, 0, 0.6);
+    border: 2px solid red;
+    border-radius: 8px;
+    padding: 0.5rem;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.error-msg.active {
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.footer {
+    text-align: center;
+    width: 100vw;
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    font-size: 1.2rem;
+    padding: 0.5rem;
 }
