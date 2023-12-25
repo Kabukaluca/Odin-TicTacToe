@@ -7,8 +7,18 @@
                 field.addEventListener("click", function() {
                     let dataIndex = parseInt(this.getAttribute("data-index"));
                     gameLogic.setField(dataIndex);
-
                 });
+            }),
+            
+            fields.forEach(field => {
+                field.addEventListener("mouseenter", function() {
+                   // let dataIndex = parseInt(this.getAttribute("data-index"));
+                    this.classList.add(`${player.currPlayer}-hover`);    
+                }),
+
+                field.addEventListener("mouseleave", function() {
+                    this.classList.remove(`${player.currPlayer}-hover`);
+                })
             })
         )
     })();
@@ -29,12 +39,14 @@
     // GAMEBOARD 
     gameboard = {
         gameboard: ["", "", "", "", "", "", "", "", ""],
+
         blur() {
             const gameContainer = document.querySelector(".game-container");
             return (
                 gameContainer.classList.add("blur")
             )
         },
+
         removeBlur() {
             const gameContainer = document.querySelector(".game-container");
             return (
@@ -47,11 +59,10 @@
     gameLogic = {
         setField(field) {
             const errorMsg = document.querySelector(".error-msg");
-            const error = document.querySelector(".error");
 
             if(gameboard.gameboard[field] !== "") {
                 return(
-                    errorMsg.innerText = (`This field (${field + 1}) has already been selected by ${player.currPlayer}`),
+                    errorMsg.innerText = (`This field (${field + 1}) has already been selected`),
                     errorMsg.classList.add("active")
                     )
             } else {

@@ -98,11 +98,38 @@ body {
     transform: rotate(-45deg);
 }
 
+.gameboard > .X-hover::before,
+.gameboard > .X-hover::after {
+    content: "";
+    width: calc(var(--field-size) * 0.1);
+    height: var(--mark-size);
+    background-color: rgb(127, 127, 127);
+    border-radius: 1rem;
+    position: absolute;
+}
+
+.gameboard > .X-hover::before {
+    transform: rotate(45deg);
+}
+
+.gameboard > .X-hover::after {
+    transform: rotate(-45deg);
+}
+
 .gameboard > #O::before {
     content: "";
     width: calc(var(--mark-size) * 0.59);
     height: calc(var(--mark-size) * 0.59);
     border: calc(var(--mark-size) * 0.1) solid black;
+    border-radius: 10rem;
+    position: absolute;
+}
+
+.gameboard > .O-hover::before {
+    content: "";
+    width: calc(var(--mark-size) * 0.59);
+    height: calc(var(--mark-size) * 0.59);
+    border: calc(var(--mark-size) * 0.1) solid rgba(127, 127, 127, 0.5);
     border-radius: 10rem;
     position: absolute;
 }
@@ -185,6 +212,7 @@ body {
     border-radius: 8px;
     padding: 0.5rem;
     transition: opacity 0.5s ease-in-out;
+    letter-spacing: 0.1rem;
 }
 
 .error-msg.active {
@@ -202,3 +230,7 @@ body {
     font-size: 1.2rem;
     padding: 0.5rem;
 }
+
+
+
+/* CREATE X / O HOVER CLASSES*/ 
