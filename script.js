@@ -12,8 +12,9 @@
             
             fields.forEach(field => {
                 field.addEventListener("mouseenter", function() {
-                   // let dataIndex = parseInt(this.getAttribute("data-index"));
-                    this.classList.add(`${player.currPlayer}-hover`);    
+                   if (!this.id.includes("X") && !this.id.includes("O")) {
+                        this.classList.add(`${player.currPlayer}-hover`);    
+                   }
                 }),
 
                 field.addEventListener("mouseleave", function() {
