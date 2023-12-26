@@ -102,7 +102,7 @@
                     dialog.classList.add("active"),
                     gameboard.blur(),
 
-                    outcomeMsg.innerText =`${player.currPlayer} Wins The Game`,
+                    outcomeMsg.innerText =`${player.currPlayer} Wins the Game`,
                     gameLogic.restart()
                 );
             } else if (draw) {
@@ -131,7 +131,9 @@
                     gameboard.gameboard = ["", "", "", "", "", "", "", "", ""],
     
                     fields.forEach(field => {
-                        field.id = "";
+                        field.id = "",
+                        field.classList.remove("O-hover"),
+                        field.classList.remove("X-hover");
                     }),
 
                     dialog.classList.remove("active"),
