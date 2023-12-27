@@ -98,27 +98,39 @@
 
             if (win) {
                 return(
-                    dialog.showModal(),
-                    dialog.classList.add("active"),
-                    gameboard.blur(),
-
+                    gameLogic.dialogOpen(),
                     outcomeMsg.innerText =`${player.currPlayer} Wins the Game`,
-                    gameLogic.restart()
+                    gameLogic.restart(),
+                    player.switchPlayer()
                 );
             } else if (draw) {
                 return (
-                    dialog.showModal(),
-                    dialog.classList.add("active"),
-                    gameboard.blur(),
-                
+                    gameLogic.dialogOpen(),
                     outcomeMsg.innerText= "It's a Draw!",
-                    gameLogic.restart()
+                    gameLogic.restart(),
+                    player.switchPlayer()
                 );
             } else {
                 return (
                     player.switchPlayer()
                 );
             };
+        },
+
+        dialogOpen() {
+            return (
+                dialog.showModal(),
+                dialog.classList.add("active"),
+                gameboard.blur()
+            );
+        },
+
+        dialogClose() {
+            return(
+                dialog.classList.remove("active"),
+                    gameboard.removeBlur(),
+                    dialog.close()
+            );
         },
 
         restart() {
@@ -136,9 +148,7 @@
                         field.classList.remove("X-hover");
                     }),
 
-                    dialog.classList.remove("active"),
-                    gameboard.removeBlur(),
-                    dialog.close()
+                    gameLogic.dialogClose()
                 );
             });     
         }
