@@ -60,10 +60,11 @@
     gameLogic = {
         setField(field) {
             const errorMsg = document.querySelector(".error-msg");
+            let lastPlayer = (player.currPlayer === player.player_x) ? player.player_o : player.player_x;
 
             if(gameboard.gameboard[field] !== "") {
                 return(
-                    errorMsg.innerText = (`This field (${field + 1}) has already been selected`),
+                    errorMsg.innerText = (`This field (${field + 1}) has already been selected by ${lastPlayer}`),
                     errorMsg.classList.add("active")
                     )
             } else {
